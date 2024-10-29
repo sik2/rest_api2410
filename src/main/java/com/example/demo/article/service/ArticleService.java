@@ -30,7 +30,7 @@ public class ArticleService {
         return optionalArticle.orElse(null);
     }
 
-    public Article write(String content, String subject) {
+    public Article write(String subject, String content) {
         Article article = Article.builder()
                 .subject(subject)
                 .content(content)
@@ -47,5 +47,9 @@ public class ArticleService {
         this.articleRepository.save(article);
 
         return article;
+    }
+
+    public void delete(Article article) {
+        this.articleRepository.delete(article);
     }
 }
