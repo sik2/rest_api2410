@@ -24,10 +24,10 @@ public class ArticleService {
         return articleDTOList;
     }
 
-    public ArticleDTO getArticle(Long id) {
+    public Article getArticle(Long id) {
         Optional<Article> optionalArticle = this.articleRepository.findById(id);
 
-        return optionalArticle.map(article -> new ArticleDTO(article)).orElse(null);
+        return optionalArticle.orElse(null);
     }
 
     public Article write(String content, String subject) {
@@ -35,6 +35,15 @@ public class ArticleService {
                 .subject(subject)
                 .content(content)
                 .build();
+        this.articleRepository.save(article);
+
+        return article;
+    }
+
+    public Article update(Article article, String content, String subject) {
+        article.setSubject(subject);
+        article.setContent(content);
+
         this.articleRepository.save(article);
 
         return article;
