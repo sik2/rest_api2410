@@ -29,4 +29,14 @@ public class ArticleService {
 
         return optionalArticle.map(article -> new ArticleDTO(article)).orElse(null);
     }
+
+    public Article write(String content, String subject) {
+        Article article = Article.builder()
+                .subject(subject)
+                .content(content)
+                .build();
+        this.articleRepository.save(article);
+
+        return article;
+    }
 }
