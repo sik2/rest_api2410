@@ -74,10 +74,10 @@ public class ApiV1ArticleController {
     }
 
     @PatchMapping("/{id}")
-    public String modify(@PathVariable("id") Long id, @RequestParam("subject") String subject, @RequestParam("content") String content) {
+    public String modify(@PathVariable("id") Long id, @Valid @RequestBody ArticleRequest articleRequest) {
         System.out.println(id);
-        System.out.println(subject);
-        System.out.println(content);
+        System.out.println(articleRequest.getSubject());
+        System.out.println(articleRequest.getContent());
         return "수정완료";
     }
 
