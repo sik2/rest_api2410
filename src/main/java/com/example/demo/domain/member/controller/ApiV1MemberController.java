@@ -1,8 +1,8 @@
 package com.example.demo.domain.member.controller;
 
+import com.example.demo.domain.member.dto.request.MemberRequest;
 import com.example.demo.domain.member.dto.response.MemberResponse;
 import com.example.demo.domain.member.entity.Member;
-import com.example.demo.domain.member.dto.request.MemberRequest;
 import com.example.demo.domain.member.service.MemberService;
 import com.example.demo.global.RsData.RsData;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 
 @RestController
-@RequestMapping(value = "/api/v1/members", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/members")
 @RequiredArgsConstructor
 @Tag(name = "ApiV1MemberController", description = "회원 인증인가 API")
 public class ApiV1MemberController {
