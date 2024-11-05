@@ -37,12 +37,23 @@ public class ApiV1MemberController {
         Member member = this.memberService.getMember(memberRequest.getUsername());
 
         String accessToken = jwtProvider.genAccessToken(member);
-        Cookie cookie  = new Cookie("accessToken", accessToken);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 60);
-        res.addCookie(cookie);
+        Cookie accessTokenCookie  = new Cookie("accessToken", accessToken);
+        accessTokenCookie.setHttpOnly(true);
+        accessTokenCookie.setSecure(true);
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setMaxAge(60 * 60);
+        res.addCookie(accessTokenCookie);
+
+
+        String refreshToken = member.getRefreshToken();
+        Cookie refreshTokenCookie  = new Cookie("refreshToken", refreshToken);
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setSecure(true);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(60 * 60);
+        res.addCookie(refreshTokenCookie);
+
+
         
         return RsData.of("200", "토큰 발급 성공: " + accessToken , new MemberResponse(member));
     }
@@ -62,5 +73,21 @@ public class ApiV1MemberController {
         Member member = this.memberService.getMember(username);
 
         return RsData.of("200", "내 회원정보", new MemberResponse(member));
+    }
+
+    @GetMapping("/logout")
+    public RsData logout (HttpServletResponse res) {
+
+        Cookie accessTokenCookie = new Cookie("accessToken", null);
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setMaxAge(0);
+        res.addCookie(accessTokenCookie);
+
+        Cookie refreshTokenCookie = new Cookie("refreshToken", null);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(0);
+        res.addCookie(refreshTokenCookie);
+
+        return RsData.of("200", "로그아웃 성공");
     }
 }
