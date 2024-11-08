@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function ArticleList() {
     const [articleList, setArticleList] = useState([])
@@ -28,7 +29,9 @@ function ArticleList() {
                     {articleList.map((article) => (
                         <tr key={article.id}>
                             <td>{article.id}</td>
-                            <td>{article.subject}</td>
+                            <td>
+                                <Link to={`/article/detail/${article.id}`}>{article.subject}</Link>
+                            </td>
                             <td>{article.content}</td>
                             <td>{article.author}</td>
                         </tr>
