@@ -14,13 +14,27 @@ function ArticleList() {
 
     return (
         <>
-            <ul>
-                {articleList.map((article) => (
-                    <li key={article.id}>
-                        {article.id} / {article.subject} / {article.content} / {article.author}
-                    </li>
-                ))}
-            </ul>
+            <h2>게시글 목록</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Subject</th>
+                        <th>Content</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {articleList.map((article) => (
+                        <tr key={article.id}>
+                            <td>{article.id}</td>
+                            <td>{article.subject}</td>
+                            <td>{article.content}</td>
+                            <td>{article.author}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </>
     )
 }
